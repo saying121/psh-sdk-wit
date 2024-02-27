@@ -1,0 +1,3 @@
+interface system {
+    os-version: func() -> result<string>;
+}
