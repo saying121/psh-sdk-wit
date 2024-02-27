@@ -1,0 +1,26 @@
+interface perf {
+    record counter-stat {
+        value: u64
+    }
+    perf-new-counter: func(
+        ret-area-ptr: u32,
+        sered-cfg-ptr: u32,
+        sered-cfg-len: u32,
+    );
+    perf-enable-counter: func(
+        ret-area-ptr: u32,
+        counter-rid: u32
+    );
+    perf-disable-counter: func(
+        ret-area-ptr: u32,
+        counter-rid: u32
+    );
+    perf-reset-counter-count: func(
+        ret-area-ptr: u32,
+        counter-rid: u32
+    );
+    perf-get-counter-stat: func(
+        ret-area-ptr: u32,
+        counter-rid: u32
+    ) -> result<counter-stat, string>;
+}

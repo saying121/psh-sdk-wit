@@ -1,14 +1,27 @@
 PSH SDK Wit Project
 ===================
 
-This project is used to share wit defintions between projects that depend on.
+This project is used to share wit definitions between projects that depend on.
 
-Each directory represents some kind of performance data source or an I/O operator, for example: `perf` directory contains operators that can be used to develop a WASM module for performance engineering engineer. 
+Each wit file represents some kind of performance data source or an I/O operator, for example, `perf.``wit` contains operators that collect Linux perf data and can be used to develop a WASM module for performance engineering engineers.
+
+Test cases:
+===========
+
+- Guest side (wasm_module)
+  
+The project under `tests/wasm_module/Rust` depends on `wit-bindgen`. Before you are going to use it, install `wit-bindgen` by
+```
+cargo install --git https://github.com/bytecodealliance/wit-bindgen wit-bindgen-cli
+```
+
+- Host side
+  * Wasmtime: TODO
 
 How To Use It?
 ==============
 
-- Add this project as a submodule in project that you're working on.
+- Add this project as a submodule in a project that you're working on.
 
 ```bash
     git submodule add git@github.com:OptimatistOpenSource/psh-sdk-wit.git /path/to/psh-sdk-wit
@@ -21,13 +34,13 @@ How To Use It?
 Rust
 ====
 
-To automatically use the latest wit files while you're running cargo build, add this code snippet in your build.rs. For example:
+To automatically use the latest wit files while you're running the cargo build, add this code snippet in your build.rs. For example:
 
 ```rust
 use std::process::Command;
 
 fn main() {
-    // Update the psh-proto submodule
+    // Update the psh-sdk-wit submodule
     let _ = Command::new("git")
         .args(&["submodule", "update", "--remote", "--merge"])
         .status();
