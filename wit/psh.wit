@@ -1,9 +1,8 @@
 package psh:profiling;
 
 world bindings {
+    import name: func() -> string;
     import system;
     import perf;
     import memory;
-    
-    export profile-main: func();
 }
