@@ -1,0 +1,61 @@
+interface cpu {
+    record tlb-size {
+        count: u32,
+        unit: u32,
+    }
+
+    record address-sizes {
+        phy: u8,
+        virt: u8
+    }
+
+    record arm64-cpu-info {
+        processor: u32,
+        bogomips: float32,
+        features: list<string>,
+        cpu-implementer: u16,
+        cpu-architecture: u16,
+        cpu-variant: u16,
+        cpu-part: u16,
+        cpu-revision: u16,
+        address-sizes: address-sizes,
+    }
+
+    record x64-cpu-info {
+        processor: u32,
+        vendor-id: string,
+        model-name: string,
+        cpu-family: u32,
+        model: u32,
+        stepping: u32,
+        microcode: string,
+        cpu-mhz: f64,
+        cache-size: u32,
+        physical-id: u32,
+        siblings: u32,
+        core-id: u32,
+        cpu-cores: u32,
+        apicid: u32,
+        initial-apicid: u32,
+        fpu: bool,
+        fpu-exception: bool,
+        cpuid-level: u32,
+        wp: bool, // wp stands for ?
+        flag: list<string>,
+        bugs: list<string>,
+        bogomips: f32,
+        tlb-size: tlb-size,
+        clflush-size: u8,
+        cache-alignment: u8,
+        address-sizes: address-sizes,
+        power-management: list<string>, 
+    }
+    
+    variant cpu-info {
+        x64(list<x64-cpu-info>),
+        arm64(list<arm64-cpu-info>),
+        unsupported(string)
+    }
+
+    get-cpu-info: func() -> result<cpu-info, string>;
+}

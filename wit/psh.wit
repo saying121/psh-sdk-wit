@@ -5,4 +5,5 @@ world bindings {
     import system;
     import perf;
     import memory;
+    import cpu;
 }
