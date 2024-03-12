@@ -1,3 +1,4 @@
 interface system {
-    os-version: func() -> result<string>;
+    os-version: func() -> option<string>;
+    kernel-version: func() -> string;
 }
