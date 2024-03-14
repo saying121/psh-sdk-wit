@@ -1,0 +1,7 @@
+package profiling:system@0.0.0;
+
+world imports {
+    import cpu;
+    import memory;
+    import os;
+}

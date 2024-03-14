@@ -1,3 +1,5 @@
+package profiling:system@0.0.0;
+
 interface cpu {
     record tlb-size {
         count: u32,
@@ -48,9 +50,9 @@ interface cpu {
         clflush-size: u8,
         cache-alignment: u8,
         address-sizes: address-sizes,
-        power-management: list<string>, 
+        power-management: list<string>,
     }
-    
+
     variant cpu-info {
         x64(list<x64-cpu-info>),
         arm64(list<arm64-cpu-info>),
