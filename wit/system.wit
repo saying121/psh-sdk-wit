@@ -1,4 +1,32 @@
 interface system {
-    os-version: func() -> option<string>;
-    kernel-version: func() -> string;
+    record kernel-version {
+        major: u8,
+        minor: u8,
+        patch: u16,
+    }
+
+    variant distro-kind {
+        arch,
+        cent-os,
+        debian,
+        fedora,
+        gentoo,
+        kali,
+        manjaro,
+        mint,
+        nix-os,
+        other     (string),
+        pop-os,
+        red-hat,
+        slackware,
+        ubuntu,
+    }
+
+    record distro-version {
+        distro: distro-kind,
+        version: option<string>,
+    }
+
+    get-distro-version: func() -> result<distro-version, string>;
+    get-kernel-version: func() -> result<kernel-version, string>;
 }
