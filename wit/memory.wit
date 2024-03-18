@@ -55,5 +55,48 @@ interface memory {
         direct-map1-g: option<u64>,
     }
 
+    record memory-module {
+        array-handle: u32,
+        error-info-handle: option<u32>,
+        total-width: option<u8>,
+        data-width: option<u8>,
+        size: u64,
+        form-factor: string,
+        set: option<string>,
+        locator: string,
+        bank-locator: option<string>,
+        // renamed `type` to `module-type` as `type` is a keyword in WIT definition.
+        // for `Debug` trait, it's better to print `type` instead of `module-type`
+        // to maintain the consistence with other places.
+        module-type: string,
+        type-detail: string,
+        speed: option<string>,
+        manufacturer: option<string>,
+        serial-number: option<string>,
+        asset-tag: option<string>,
+        part-number: option<string>,
+        rank: option<u16>,
+        configured-memory-speed: option<string>,
+        min-voltage: option<string>,
+        max-voltage: option<string>,
+        configured-voltage: option<string>,
+        memory-technology: option<string>,
+        memory-operating-mode-capability: option<string>,
+        firmware-version: option<string>,
+        module-manufacturer-id: option<string>,
+        module-product-id: option<string>,
+        memory-subsystem-controller-manufacturer-id: option<string>,
+        memory-subsystem-controller-product-id: option<string>,
+        non-volatile-size: option<u64>,
+        volatile-size: option<u64>,
+        // There is no need to define cache & logical size to
+        // option<u64>, option<u32> is sufficient, but to reuse
+        // parse_size_str() closure and satisfy Rust type inference
+        // requirements, we expand them.
+        cache-size: option<u64>,
+        logical-size: option<u64>,
+    }
+
     get-memory-info: func() -> result<memory-info, string>;
+    get-memory-module: func() -> result<list<memory-module>, string>;
 }
