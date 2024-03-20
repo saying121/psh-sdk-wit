@@ -1,0 +1,24 @@
+package profiling:system@0.0.0;
+
+interface interrupts {
+    variant kind {
+        common(u32),
+        arch-specific(string)
+    }
+
+    record stat {
+        per-cpu-counts: list<u64>,
+        interrupt-type: kind,
+        description: string
+    }
+
+    record irq {
+        number: u32,
+        smp-affinity: option<string>,
+        smp-affinity-list: option<string>,
+        node: option<string>
+    }
+
+    get-interrupts-info: func() -> result<list<irq>, string>;
+    get-interrupts-stat: func() -> result<list<stat>, string>;
+}
