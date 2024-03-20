@@ -9,6 +9,7 @@ interface counter-group {
         add-member: func(cfg: config) -> result<counter-guard, string>;
         enable    : static func(counter-group: counter-group) -> result<fixed-counter-group, string>;
         stat      : func() -> result<counter-group-stat, string>;
+        into-fixed: static func(counter-group: counter-group) -> result<fixed-counter-group, string>;
     }
 
     resource fixed-counter-group {
