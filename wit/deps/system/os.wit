@@ -1,4 +1,6 @@
-interface system {
+package profiling:system@0.0.0;
+
+interface os {
     record kernel-version {
         major: u8,
         minor: u8,

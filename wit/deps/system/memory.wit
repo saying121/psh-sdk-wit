@@ -1,3 +1,5 @@
+package profiling:system@0.0.0;
+
 interface memory {
     record memory-info {
         mem-total: u64,
