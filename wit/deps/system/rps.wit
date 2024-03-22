@@ -1,0 +1,16 @@
+package profiling:system@0.0.0;
+
+interface rps {
+    record rps-queue {
+        name: string,
+        cpus: option<string>,
+        flow-cnt: option<string>,
+    }
+
+    record rps-info {
+        device: string,
+        queues: list<rps-queue>,
+    }
+
+    get-rps-info: func() -> list<rps-info>;
+}

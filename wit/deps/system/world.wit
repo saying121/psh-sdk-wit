@@ -5,4 +5,5 @@ world imports {
     import interrupts;
     import memory;
     import os;
+    import rps;
 }
