@@ -1,10 +1,12 @@
 package profiling:system@0.0.0;
 
 interface rps {
+    use cpu.{cpu-mask};
+
     record rps-queue {
         name: string,
-        cpus: option<string>,
-        flow-cnt: option<string>,
+        cpus: option<cpu-mask>,
+        flow-cnt: option<u32>,
     }
 
     record rps-info {

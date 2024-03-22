@@ -1,6 +1,10 @@
 package profiling:system@0.0.0;
 
 interface cpu {
+    record cpu-mask {
+        mask: list<bool>,
+    }
+
     record tlb-size {
         count: u32,
         unit: u32,
