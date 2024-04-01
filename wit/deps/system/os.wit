@@ -29,6 +29,50 @@ interface os {
         version: option<string>,
     }
 
+    record process {
+        pid: u64,
+        name: string,
+        cmd: list<string>,
+        exe: option<string>,
+        environ: list<string>,
+        cwd: option<string>,
+        root: option<string>,
+        start-time: u64,
+        parent-id: option<u64>,
+        user-id: option<u64>,
+        effective-user-id: option<u64>,
+        group-id: option<u64>,
+        effective-group-id: option<u64>,
+        run-time: u64,
+        status: process-status,
+        cpu-usage: f32,
+        disk-usage: disk-usage,
+        memory-usage: u64,
+        virtual-memory-usage: u64,
+    }
+
+    variant process-status {
+        idle,
+        run,
+        sleep,
+        stop,
+        zombie,
+        tracing,
+        dead,
+        wakekill,
+        waking,
+        parked,
+        lock-blocked,
+        uninterruptible-disk-sleep,
+        unknown(u32),
+    }
+
+    record disk-usage {
+        written-bytes: u64,
+        read-bytes: u64,
+    }
+
     get-distro-version: func() -> result<distro-version, string>;
     get-kernel-version: func() -> result<kernel-version, string>;
+    get-processes: func() -> result<list<process>, string>;
 }
