@@ -4,6 +4,7 @@ world imports {
     import cpu;
     import interrupt;
     import memory;
+    import network;
     import os;
     import process;
     import rps;

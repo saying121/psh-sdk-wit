@@ -1,0 +1,37 @@
+package profiling:system@0.0.0;
+
+interface network {
+    record network-stat {
+        // network interface name
+        name: string,
+
+        recv-bytes: u64,
+        recv-packets: u64,
+        recv-errors: u64,
+        // bad packets received
+        recv-drop: u64,
+        // fifo overrun
+        recv-fifo: u64,
+        // frame alignment errors
+        recv-frame: u64,
+        // number of compressed packets received
+        recv-compressed: u64,
+        // number of multicast packets received
+        recv-multicast: u64,
+
+        sent-bytes: u64,
+        sent-packets: u64,
+        sent-errors: u64,
+        // number of packets dropped during transmission
+        sent-drop: u64,
+        sent-fifo: u64,
+        // number of collisions
+        sent-collisions: u64,
+        // number of packets not sent due to carrier errors
+        sent-carrier: u64,
+        // number of compressed packets transmitted
+        sent-compressed: u64,
+    }
+
+    stat: func() -> result<list<network-stat>, string>;
+}
