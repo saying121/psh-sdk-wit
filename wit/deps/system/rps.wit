@@ -14,5 +14,5 @@ interface rps {
         queues: list<rps-queue>,
     }
 
-    get-rps-info: func() -> list<rps-info>;
+    info: func() -> list<rps-info>;
 }

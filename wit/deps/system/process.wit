@@ -1,0 +1,50 @@
+package profiling:system@0.0.0;
+
+interface process {
+    resource process {
+        pid: func() -> s32;
+        cmd: func() -> result<list<string>, string>;
+        exe: func() -> result<string, string>;
+        environ: func() -> result<list<tuple<string, string>>, string>;
+        cwd: func() -> result<string, string>;
+        root: func() -> result<string, string>;
+        user-id: func() -> result<u32, string>;
+    }
+
+    record process-stat {
+        proc: process,
+        name: string,
+        pid: s32,
+        utime: u64,
+        stime: u64,
+        cutime: s64,
+        cstime: s64,
+        priority: s64,
+        nice: s64,
+        num-threads: s64,
+        start-time: u64,
+        state: process-state,
+        memory-usage: u64,
+        virtual-memory-usage: u64,
+        written-bytes: u64,
+        read-bytes: u64,
+        parent-id: s32,
+    }
+
+    variant process-state {
+        running,
+        sleeping,
+        waiting,
+        zombie,
+        stopped,
+        tracing,
+        dead,
+        wakekill,
+        waking,
+        parked,
+        idle,
+    }
+
+    all: func() -> result<list<process-stat>, string>;
+    current: func() -> result<process, string>;
+}

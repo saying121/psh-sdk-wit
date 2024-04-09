@@ -63,5 +63,5 @@ interface cpu {
         unsupported(string)
     }
 
-    get-cpu-info: func() -> result<cpu-info, string>;
+    info: func() -> result<cpu-info, string>;
 }

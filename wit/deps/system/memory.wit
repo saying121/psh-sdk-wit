@@ -1,7 +1,7 @@
 package profiling:system@0.0.0;
 
 interface memory {
-    record memory-info {
+    record memory-stat {
         mem-total: u64,
         mem-free: u64,
         mem-available: u64,
@@ -57,7 +57,7 @@ interface memory {
         direct-map1-g: option<u64>,
     }
 
-    record memory-module {
+    record memory-info {
         array-handle: u32,
         error-info-handle: option<u32>,
         total-width: option<u8>,
@@ -99,6 +99,6 @@ interface memory {
         logical-size: option<u64>,
     }
 
-    get-memory-info: func() -> result<memory-info, string>;
-    get-memory-module: func() -> result<list<memory-module>, string>;
+    info: func() -> result<list<memory-info>, string>;
+    stat: func() -> result<memory-stat, string>;
 }
