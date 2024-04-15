@@ -1,0 +1,29 @@
+package profiling:system@0.0.0;
+
+interface disk {
+    record disk-operation-stat {
+        operations: u64,
+        sectors: u64,
+        merged: u64,
+        time: u64,
+    }
+
+    record disk-stat {
+        name: string,
+        major: s32,
+        minor: s32,
+
+        read: disk-operation-stat,
+        write: disk-operation-stat,
+        discard: option<disk-operation-stat>,
+
+        in-progress: u64,
+        time-in-progress: u64,
+        weighted-time-in-progress: u64,
+
+        flushes: option<u64>,
+        time-flushing: option<u64>,
+    }
+
+    stat: func() -> result<list<disk-stat>, string>;
+}
