@@ -1,6 +1,6 @@
-mod bindings;
+mod wit;
 
-use crate::bindings::profiling::{
+use crate::wit::profiling::{
     perf::{
         config::{Config, Cpu, Event, EventScope, ExtraConfig, HardwareEvent, Process},
         counter::Counter,
@@ -8,14 +8,18 @@ use crate::bindings::profiling::{
     system,
 };
 
-extern crate alloc;
-
 fn main() {
-    println!("{:?}", system::os::get_distro_version());
-    println!("{:?}", system::os::get_kernel_version());
+    println!("{:#?}", system::os::info());
     let config = Config {
         event: Event::Hardware(HardwareEvent::CpuCycles),
-        scopes: vec![EventScope::User],
+        scopes: vec![
+            EventScope::User,
+            EventScope::Kernel,
+            EventScope::Hv,
+            EventScope::Idle,
+            EventScope::Guest,
+            EventScope::Host,
+        ],
         extra_config: ExtraConfig {
             pinned: false,
             exclusive: false,
