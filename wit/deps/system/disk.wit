@@ -25,5 +25,9 @@ interface disk {
         time-flushing: option<u64>,
     }
 
-    stat: func() -> result<list<disk-stat>, string>;
+    // For most system statistics, sampling interval less than 1ms isn't of much use.
+    // Thus the minimal interval-ms is 1ms. 
+    // stat function accepts interval-ms as a hint to guarantee collected statistics
+    // data is new enough and with low overhead.
+    stat: func(interval-ms: u64) -> result<list<disk-stat>, string>;
 }
