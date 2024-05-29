@@ -63,5 +63,65 @@ interface cpu {
         unsupported(string)
     }
 
+    record cpu-stat {
+        /// Time(ms) spent in user mode
+        user: u64,
+        /// Time(ms) spent in user mode with low priority (nice)
+        nice: u64,
+        /// Time(ms) spent in system mode
+        system: u64,
+        /// Time(ms) spent in the idle state
+        idle: u64,
+        /// Time(ms) waiting for I/O to complete
+        ///
+        /// This value is not reliable, for the following reasons:
+        ///
+        /// 1. The CPU will not wait for I/O to complete; iowait is the time that a
+        ///    task is waiting for I/O to complete.  When a CPU goes into idle state
+        ///    for outstanding task I/O, another task will be scheduled on this CPU.
+        ///
+        /// 2. On a multi-core CPU, this task waiting for I/O to complete is not running
+        ///    on any CPU, so the iowait for each CPU is difficult to calculate.
+        ///
+        /// 3. The value in this field may *decrease* in certain conditions.
+        ///
+        /// (Since Linux 2.5.41)
+        iowait: option<u64>,
+        /// Time(ms) servicing interrupts
+        ///
+        /// (Since Linux 2.6.0)
+        irq: option<u64>,
+        /// Time(ms) servicing softirqs
+        ///
+        /// (Since Linux 2.6.0)
+        softirq: option<u64>,
+        /// Time(ms) of stolen time.
+        ///
+        /// Stolen time is the time spent in other operating systems when running in
+        /// a virtualized environment.
+        ///
+        /// (Since Linux 2.6.11)
+        steal: option<u64>,
+        /// Time(ms) spent running a virtual CPU for guest operating systems under control
+        /// of the linux kernel
+        ///
+        /// (Since Linux 2.6.24)
+        guest: option<u64>,
+        /// Time(ms) spent running a niced guest
+        ///
+        /// (Since Linux 2.6.33)
+        guest-nice: option<u64>,
+    }
+
+    record cpu-stats {
+        total: cpu-stat,
+        per-cpu: list<cpu-stat>,
+    }
+
+    // For most system statistics, sampling interval less than 1ms isn't of much use.
+    // Thus the minimal interval-ms is 1ms. 
+    // stat function accepts interval-ms as a hint to guarantee collected statistics
+    // data is new enough and with low overhead.
+    stat: func(interval-ms: u64) -> result<cpu-stats, string>;
     info: func() -> result<cpu-info, string>;
 }
