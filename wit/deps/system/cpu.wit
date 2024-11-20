@@ -17,7 +17,7 @@ interface cpu {
 
     record arm64-cpu-info {
         processor: u32,
-        bogomips: float32,
+        bogomips: f32,
         features: list<string>,
         cpu-implementer: u16,
         cpu-architecture: u16,
