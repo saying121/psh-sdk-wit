@@ -1,0 +1,5 @@
+package profiling:data-export@0.0.0;
+
+interface file {
+    export-bytes: func(bytes: list<u8>) -> result<_, string>;
+}

@@ -3,4 +3,5 @@ package psh:profiling;
 world bindings {
     include profiling:system/imports@0.0.0;
     include profiling:perf/imports@0.0.0;
+    include profiling:data-export/imports@0.0.0;
 }
