@@ -1,0 +1,12 @@
+package profiling:data-export@0.0.0;
+
+interface measurement {
+    export-point: func(point: point) -> result<_, string>;
+
+    record point {
+        name  : string,
+        tags  : list<tuple<string, string>>,
+        fields: list<tuple<string, string>>,
+        ts    : option<u64>, // UNIX timestamp in nano seconds
+    }
+}
