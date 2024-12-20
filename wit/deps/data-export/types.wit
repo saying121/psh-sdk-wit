@@ -1,0 +1,10 @@
+interface types {
+    variant field-value {
+        float(f64),
+        int(s64),
+        uint(u64),
+        text(string),
+        boolean(bool),
+        ns-ts(u64), // UNIX timestamp in nano seconds
+    }
+}
