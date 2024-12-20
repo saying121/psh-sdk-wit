@@ -1,12 +1,14 @@
 package profiling:data-export@0.0.0;
 
 interface measurement {
+    use types.{field-value};
+
     export-point: func(point: point) -> result<_, string>;
 
     record point {
         name  : string,
         tags  : list<tuple<string, string>>,
-        fields: list<tuple<string, string>>,
+        fields: list<tuple<string, field-value>>,
         ts    : option<u64>, // UNIX timestamp in nano seconds
     }
 }
