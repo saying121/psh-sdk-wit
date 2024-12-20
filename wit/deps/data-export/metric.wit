@@ -9,6 +9,6 @@ interface metric {
         name : string,
         tags : list<tuple<string, string>>,
         value: field-value,
-        ts   : option<u64>, // UNIX timestamp in nano seconds
+        ns-ts: option<u64>, // UNIX timestamp in nano seconds
     }
 }

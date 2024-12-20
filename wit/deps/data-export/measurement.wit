@@ -9,6 +9,6 @@ interface measurement {
         name  : string,
         tags  : list<tuple<string, string>>,
         fields: list<tuple<string, field-value>>,
-        ts    : option<u64>, // UNIX timestamp in nano seconds
+        ns-ts : option<u64>, // UNIX timestamp in nano seconds
     }
 }
