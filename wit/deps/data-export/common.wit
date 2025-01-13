@@ -1,4 +1,4 @@
-interface types {
+interface common {
     variant field-value {
         float(f64),
         int(s64),
@@ -7,4 +7,6 @@ interface types {
         boolean(bool),
         ns-ts(u64), // UNIX timestamp in nano seconds
     }
+
+    flush-buf: func() -> result<_, string>;
 }
