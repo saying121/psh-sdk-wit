@@ -7,4 +7,6 @@ interface common {
         boolean(bool),
         ns-ts(u64), // UNIX timestamp in nano seconds
     }
+
+    flush-buf: func() -> result<_, string>;
 }
