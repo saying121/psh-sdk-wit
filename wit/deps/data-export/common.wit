@@ -1,4 +1,4 @@
-interface types {
+interface common {
     variant field-value {
         float(f64),
         int(s64),

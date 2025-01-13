@@ -1,7 +1,7 @@
 package profiling:data-export@0.0.0;
 
 world imports {
-    import types;
+    import common;
     import file;
     import metric;
     import measurement;
