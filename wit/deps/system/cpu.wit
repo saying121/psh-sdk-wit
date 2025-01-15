@@ -116,10 +116,24 @@ interface cpu {
     record cpu-stats {
         total: cpu-stat,
         per-cpu: list<cpu-stat>,
+        /// The number of context switches that the system underwent
+        ctxt: u64,
+        /// Boot time, in number of seconds since the Epoch
+        btime: u64,
+        /// Number of forks since boot
+        processes: u64,
+        /// Number of processes in runnable state
+        ///
+        /// (Since Linux 2.5.45)
+        procs-running: option<u32>,
+        /// Number of processes blocked waiting for I/O
+        ///
+        /// (Since Linux 2.5.45)
+        procs-blocked: option<u32>,
     }
 
     // For most system statistics, sampling interval less than 1ms isn't of much use.
-    // Thus the minimal interval-ms is 1ms. 
+    // Thus the minimal interval-ms is 1ms.
     // stat function accepts interval-ms as a hint to guarantee collected statistics
     // data is new enough and with low overhead.
     stat: func(interval-ms: u64) -> result<cpu-stats, string>;
