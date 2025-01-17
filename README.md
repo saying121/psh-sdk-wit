@@ -27,6 +27,7 @@ There are a few options available (we recommand `git submodule` and `wit-bindgen
 wit_bindgen::generate!({
     world: "bindings",
     path: "<path/to/wit>",
+    generate_all,
     // ...
 });
 ```
