@@ -9,4 +9,5 @@ world imports {
     import os;
     import process;
     import rps;
+    import vmstat;
 }
